@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/internal/operators';
+import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 //Declaring the api url that will provide data for the client app
-const apiUrl = 'YOUR_HOSTED_API_URL_HERE/';
+const apiUrl = 'https://my-flixcf.herokuapp.com/';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,29 +15,29 @@ export class UserRegistrationService {
   constructor(private http: HttpClient) {}
 
  // Making the api call for the user registration endpoint
-  public userRegistration(userDetails: any): Observable<any> {
-    console.log(userDetails);
-    return this.http.post(apiUrl + 'users', userDetails).pipe(
+  userRegistration(userDetails: any): Observable<any> {
+    return this.http.post(`${apiUrl}/users`, userDetails).pipe(
     catchError(this.handleError)
     );
   }
 
   // Making the api call for the login endpoint
   userLogin(userDetails: any): Observable<any> {
-    return this.http.post(apiUrl + "login", userDetails).pipe(
+    return this.http.post(`${apiUrl}/login`, userDetails).pipe(
       catchError(this.handleError)
     );
   }
 
   // Making the api call for all movies endpoint
   getAllMovies(): Observable<any> {
-    const token = localStorage.getItem("token");
-    return this.http.get(apiUrl + "movies", {headers: new HttpHeaders({
-      Authorization: "Bearer " + token,
-    })}).pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
-    );
+    const token = localStorage.getItem('token');
+    return this.http
+      .get(`${apiUrl}/movies`, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer' + token, 
+        }),
+      })
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   // Making the api call for one movie
