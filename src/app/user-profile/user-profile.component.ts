@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
-import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from "@angular/router";
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -40,5 +39,34 @@ export class UserProfileComponent {
       this.updatedUser.birthDate = this.user.birthDate;
       return this.user;
     });
+  }
+
+  updateUserData(): void {
+    this.fetchApiData.editUser(this.updatedUser).subscribe((result) => {
+      this.snackBar.open("User profile updated", "OK", {
+        duration: 2000,
+      });
+      localStorage.setItem("username", result.username);
+      window.location.reload();
+    });
+  }
+
+  deletUser(): void {
+    if (
+      confirm(
+        "You are about to delete your account and all your data will be lost! Are you sure?"
+        )
+    ) {
+      this.router.navigate(["welcome"]).then(() => {
+        this.snackBar.open(
+          "Account deleted successfully", "OK", {
+            duration: 2000
+          }
+        );
+      });
+      this.fetchApiData.deleteUser().subscribe((result) => {
+        localStorage.clear();
+      });
+    }
   }
 }
