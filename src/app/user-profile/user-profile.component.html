@@ -1,68 +1,70 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Profile</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <form>
-      <mat-form-field>
-        <input
-          matInput
-          [(ngModel)]="editUser.username"
-          placeholder="Username"
-          type="text"
-          value="{{ editUser.username }}"
-          name="username"
-          required
-        >
+<div style="display: flex;">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Profile</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form>
+        <mat-form-field>
+          <input
+            matInput
+            [(ngModel)]="editUser.username"
+            placeholder="Username"
+            type="text"
+            value="{{ editUser.username }}"
+            name="username"
+            required
+          >
+          </mat-form-field>
+          <mat-form-field>
+          <input
+            matInput
+            [(ngModel)]="editUser.password"
+            type = "password"
+            value="{{ editUser.password }}"
+            placeholder="Password"
+            name="password"
+            required
+          >
         </mat-form-field>
         <mat-form-field>
-        <input
-          matInput
-          [(ngModel)]="editUser.password"
-          type = "password"
-          value="{{ editUser.password }}"
-          placeholder="Password"
-          name="password"
-          required
+          <input
+            matInput
+            [(ngModel)]="editUser.email"
+            type = "email"
+            value="{{ editUser.email}}"
+            placeholder="Email"
+            name="email"
+            required
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            [(ngModel)]="editUser.birthDate"
+            type = "date"
+            value="{{ editUser.birthDate | date:'yyyy-MM-dd':'UTC+0' }}"
+            placeholder="Birthday"  
+            name="birthDate"
+          >
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button
+          mat-raised-button
+          (click)="editUser()"
+          color="primary"
         >
-      </mat-form-field>
-      <mat-form-field>
-        <input
-          matInput
-          [(ngModel)]="editUser.email"
-          type = "email"
-          value="{{ editUser.email}}"
-          placeholder="Email"
-          name="email"
-          required
+          Update Profile
+        </button>
+        <button
+          mat-raised-button
+          (click)="deleteUser()"
+          color="warn"
         >
-      </mat-form-field>
-      <mat-form-field>
-        <input
-          matInput
-          [(ngModel)]="editUser.birthDate"
-          type = "date"
-          value="{{ editUser.birthDate | date:'yyyy-MM-dd':'UTC+0' }}"
-          placeholder="Birthday"  
-          name="birthDate"
-        >
-      </mat-form-field>
-    </form>
-  </mat-card-content>
-  <mat-card-actions>
-      <button
-        mat-raised-button
-        (click)="editUser()"
-        color="primary"
-      >
-        Update Profile
-      </button>
-      <button
-        mat-raised-button
-        (click)="deleteUser()"
-        color="warn"
-      >
-        Delete Account
-      </button>
-  </mat-card-actions>
-</mat-card>
+          Delete Account
+        </button>
+    </mat-card-actions>
+  </mat-card>  
+</div>
