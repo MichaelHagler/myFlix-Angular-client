@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 
 //my imports
 import { HttpClientModule } from "@angular/common/http";
+import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,6 +19,13 @@ import { UserRegistrationFormComponent } from './user-registration-form/user-reg
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
+import { MatIconModule } from "@angular/material/icon";
+
+const appRoutes: Routes = [
+  { path: "Welcome", component: WelcomePageComponent},
+  { path: "movies", component: MovieCardComponent},
+  { path: "", redirectTo: "welcome", pathMatch: "prefix"}
+];
 
 @NgModule({
   declarations: [
@@ -28,6 +36,8 @@ import { UserLoginFormComponent } from './user-login-form/user-login-form.compon
     UserLoginFormComponent
   ],
   imports: [
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -37,7 +47,8 @@ import { UserLoginFormComponent } from './user-login-form/user-login-form.compon
     MatFormFieldModule,
     MatDialogModule,
     MatSnackBarModule,
-    FormsModule
+    FormsModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
