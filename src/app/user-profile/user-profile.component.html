@@ -1,3 +1,4 @@
+<app-nav-bar></app-nav-bar>
 <div style="display: flex;">
   <mat-card>
     <mat-card-header>
@@ -8,20 +9,20 @@
         <mat-form-field>
           <input
             matInput
-            [(ngModel)]="editUser.username"
+            [(ngModel)]="user.username"
             placeholder="Username"
             type="text"
-            value="{{ editUser.username }}"
+            value="{{ user.username }}"
             name="username"
             required
           >
-          </mat-form-field>
-          <mat-form-field>
+        </mat-form-field>
+        <mat-form-field>
           <input
             matInput
-            [(ngModel)]="editUser.password"
+            [(ngModel)]="user.password"
             type = "password"
-            value="{{ editUser.password }}"
+            value="{{ user.password }}"
             placeholder="Password"
             name="password"
             required
@@ -30,9 +31,9 @@
         <mat-form-field>
           <input
             matInput
-            [(ngModel)]="editUser.email"
+            [(ngModel)]="user.email"
             type = "email"
-            value="{{ editUser.email}}"
+            value="{{ user.email}}"
             placeholder="Email"
             name="email"
             required
@@ -41,30 +42,30 @@
         <mat-form-field>
           <input
             matInput
-            [(ngModel)]="editUser.birthDate"
+            [(ngModel)]="user.birthDate"
             type = "date"
-            value="{{ editUser.birthDate | date:'yyyy-MM-dd':'UTC+0' }}"
-            placeholder="Birthday"  
+            value="{{ user.birthDate | date:'yyyy-MM-dd':'UTC+0' }}"
+            placeholder="Birthday"
             name="birthDate"
           >
         </mat-form-field>
       </form>
     </mat-card-content>
     <mat-card-actions>
-        <button
-          mat-raised-button
-          (click)="editUser()"
-          color="primary"
-        >
-          Update Profile
-        </button>
-        <button
-          mat-raised-button
-          (click)="deleteUser()"
-          color="warn"
-        >
-          Delete Account
-        </button>
+      <button
+        mat-raised-button
+        (click)="updateUserData()"
+        color="primary"
+      >
+        Update Profile
+      </button>
+      <button
+        mat-raised-button
+        (click)="deleteUser()"
+        color="warn"
+      >
+        Delete Account
+      </button>
     </mat-card-actions>
-  </mat-card>  
+  </mat-card>
 </div>
