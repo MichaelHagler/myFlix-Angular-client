@@ -1,0 +1,18 @@
+
+.top-title, .nav-spacer {
+  color: hsl(170, 20%, 100%);
+  text-shadow: 1px 2px black;
+  margin: 0;
+  padding: 0.5rem;
+  border-bottom-right-radius: 50%;
+}
+
+.nav-bar {
+  background-color: lightblue;
+  position: sticky;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid black;
+  z-index: 100;
+  width: 100%;
+}

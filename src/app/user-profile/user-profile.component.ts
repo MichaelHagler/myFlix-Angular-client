@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { Router } from "@angular/router";
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {IMovies, IUser} from "../models";
 
 @Component({
   selector: 'app-user-profile',
@@ -10,15 +11,22 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class UserProfileComponent {
   //input form for users to update profile
-  @Input() updatedUser = {
+  @Input() updatedUser: IUser = {
     username: "",
     password: "",
     email: "",
-    birthDate: ""
+    birthDate: "",
+    FavoriteMovies:[]
   }
 
-  user: any = {};
-  movies: any[] = [];
+  user: IUser = {
+    username: "",
+    password: "",
+    email: "",
+    birthDate: "",
+    FavoriteMovies:[]
+  };
+  movies: IMovies[] = [];
   favorites: any[] = [];
 
   constructor(
@@ -32,7 +40,8 @@ export class UserProfileComponent {
   }
 
   getUser(): void {
-    this.fetchApiData.getUser().subscribe((resp: any) => {
+    this.fetchApiData.getUser().subscribe((resp) => {
+      console.log(resp)
       this.user = resp;
       this.updatedUser.username = this.user.username;
       this.updatedUser.email = this.user.email;
@@ -51,11 +60,11 @@ export class UserProfileComponent {
     });
   }
 
-  deletUser(): void {
+  deleteUser(): void {
     if (
       confirm(
         "You are about to delete your account and all your data will be lost! Are you sure?"
-        )
+      )
     ) {
       this.router.navigate(["welcome"]).then(() => {
         this.snackBar.open(

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from "../fetch-api-data.service";
+import {IMovies} from "../models";
 
 @Component({
   selector: 'app-movie-card',
@@ -7,7 +8,7 @@ import { FetchApiDataService } from "../fetch-api-data.service";
   styleUrls: ['./movie-card.component.scss']
 })
 export class MovieCardComponent {
-  movies: any[] = [];
+  movies: IMovies[] = [];
   constructor(public fetchApiData: FetchApiDataService) { }
 
   ngOnInit(): void {
@@ -20,5 +21,13 @@ export class MovieCardComponent {
       console.log(this.movies);
       return this.movies;
     });
+  }
+
+  addMovieToFavorites(movieId: string){
+    this.fetchApiData.addFavoriteMovie(movieId).subscribe({next:() => {
+        console.log("movie added")
+      }, error:(e) => {
+        console.log(e)
+      }})
   }
 }
