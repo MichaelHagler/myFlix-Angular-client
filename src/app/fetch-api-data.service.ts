@@ -29,6 +29,10 @@ export class FetchApiDataService {
   }
 
   // Making the api call for all movies endpoint
+  /**
+   * Gets all the movies from the api
+   * @returns  
+   */
   getAllMovies(): Observable<IMovies[]> {
     const token = localStorage.getItem('token');
     return this.http
@@ -41,6 +45,11 @@ export class FetchApiDataService {
   }
 
   // Making the api call for one movie
+  /**
+   * gets a pacific movie by title
+   * @param title 
+   * @returns 
+   */
   getMovie(title: string): Observable<IMovies> {
     const token = localStorage.getItem("token");
     return this.http.get<IMovies>(`${apiUrl}/movies/${title}`, {headers: new HttpHeaders({
@@ -48,6 +57,11 @@ export class FetchApiDataService {
       })}).pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
+  /**
+   * gets a director by name. users can view info about the director
+   * @param directorName 
+   * @returns 
+   */
   getDirector(directorName: string): Observable<any> {
     const token = localStorage.getItem("token");
     return this.http.get(apiUrl + "movies/directors", {headers: new HttpHeaders({
@@ -55,6 +69,12 @@ export class FetchApiDataService {
       })}).pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
+  /**
+   * Gets info about the genre of the movie. Name of the genre and a Description of the genre
+   * @param Name 
+   * @param Description 
+   * @returns 
+   */
   getGenre(Name: string, Description: string): Observable<IMovies> {
     const token = localStorage.getItem("token");
     return this.http.get<IMovies>(`${apiUrl}/movies/genre/`, {headers: new HttpHeaders({
@@ -79,6 +99,12 @@ export class FetchApiDataService {
   //     catchError(this.handleError));
   // }
   //
+
+  /**
+   * Adds movie to user's favorite movies list
+   * @param movieId 
+   * @returns 
+   */
   addFavoriteMovie(movieId: string): Observable<any> {
     const token = localStorage.getItem("token");
     const localStorageUser = localStorage.getItem("user");
@@ -90,6 +116,11 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
+  /**
+   * allows users to edit their profiles
+   * @param updatedUser 
+   * @returns 
+   */
   editUser(updatedUser: any): Observable<any> {
     const token = localStorage.getItem("token");
     return this.http.put(apiUrl + "users/username", updatedUser, {headers: new HttpHeaders({
@@ -97,6 +128,10 @@ export class FetchApiDataService {
       })}).pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
+  /**
+   * deletes user profile
+   * @returns 
+   */
   deleteUser(): Observable<any> {
     const token = localStorage.getItem("token");
     return this.http.delete(apiUrl + "users/username", {headers: new HttpHeaders({
@@ -104,6 +139,11 @@ export class FetchApiDataService {
       })}).pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
+  /**
+   * removes a movie that is in a user's  favorite movie list
+   * @param movieId 
+   * @returns 
+   */
   removeFavoriteMovie(movieId: string): Observable<any> {
     const token = localStorage.getItem("token");
     const localStorageUser = localStorage.getItem("user");
