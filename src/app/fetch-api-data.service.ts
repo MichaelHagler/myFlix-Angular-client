@@ -55,9 +55,9 @@ export class FetchApiDataService {
       })}).pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  getGenre(genreName: string): Observable<any> {
+  getGenre(Name: string, Description: string): Observable<IMovies> {
     const token = localStorage.getItem("token");
-    return this.http.get(apiUrl + "movies/genre", {headers: new HttpHeaders({
+    return this.http.get<IMovies>(`${apiUrl}/movies/genre/`, {headers: new HttpHeaders({
         Authorization: "Bearer " + token,
       })}).pipe(map(this.extractResponseData), catchError(this.handleError));
   }
