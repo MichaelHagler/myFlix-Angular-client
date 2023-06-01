@@ -57,12 +57,12 @@ export class FetchApiDataService {
   }
 
   
-  getGenre(Name: string, Description: string): Observable<IMovies> {
+  /*getGenre(Name: string, Description: string): Observable<IMovies> {
     const token = localStorage.getItem("token");
-    return this.http.get<IMovies>(`${apiUrl}/movies/genre/`, {headers: new HttpHeaders({
+    return this.http.get(apiUrl + "movies/genre", {headers: new HttpHeaders({
         Authorization: "Bearer " + token,
       })}).pipe(map(this.extractResponseData), catchError(this.handleError));
-  }
+  }*/
   getUser(): Observable<any> { //This route doesnt exist on your backend
     const token = localStorage.getItem("token");
     return this.http.get(apiUrl + "/users", {headers: new HttpHeaders({
