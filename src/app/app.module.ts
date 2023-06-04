@@ -23,6 +23,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import {DialogModule} from "@angular/cdk/dialog";
 import { NavbarComponent } from './nav-bar/nav-bar.component';
+import { MovieInfoComponent } from './movie-info/movie-info.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -39,7 +40,8 @@ const appRoutes: Routes = [
     WelcomePageComponent,
     UserLoginFormComponent,
     UserProfileComponent,
-    NavbarComponent
+    NavbarComponent,
+    MovieInfoComponent
   ],
   imports: [
     HttpClientModule,

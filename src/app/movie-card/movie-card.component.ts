@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from "../fetch-api-data.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { MovieInfoComponent } from '../movie-info/movie-info.component';
 import {IMovies} from "../models";
 
 @Component({
@@ -28,12 +29,13 @@ export class MovieCardComponent {
     });
   }
 
-  getGenre(movieId: string) {
-    const movie = this.movies.find(mve => mve._id === movieId)
-    if(!movie){
-      return
-    }
-    this.snackBar.open(movie.Genre.Name, movie.Genre.Description);
+  getGenre(name: string, description: string): void {
+    this.dialog.open(MovieInfoComponent, {
+      data: {
+        title: name,
+        content: description
+      },
+    });
   }
 
   getDirector(movieId: string) {
