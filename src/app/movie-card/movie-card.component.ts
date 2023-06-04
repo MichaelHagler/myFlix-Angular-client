@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from "../fetch-api-data.service";
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 import {IMovies} from "../models";
 
 @Component({
@@ -9,7 +11,11 @@ import {IMovies} from "../models";
 })
 export class MovieCardComponent {
   movies: IMovies[] = [];
-  constructor(public fetchApiData: FetchApiDataService) { }
+  constructor(
+    public fetchApiData: FetchApiDataService,
+    public snackBar: MatSnackBar,
+    public dialog: MatDialog
+    ) { }
 
   ngOnInit(): void {
     this.getMovies();
@@ -18,9 +24,33 @@ export class MovieCardComponent {
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
-      console.log(this.movies);
       return this.movies;
     });
+  }
+
+  getGenre(movieId: string) {
+    const movie = this.movies.find(mve => mve._id === movieId)
+    if(!movie){
+      return
+    }
+    this.snackBar.open(movie.Genre.Name, movie.Genre.Description);
+  }
+
+  getDirector(movieId: string) {
+    const movie = this.movies.find(mve => mve._id === movieId)
+    if(!movie){
+      return
+    }
+    
+    console.log(movie.Director.Name)
+  }
+  getDescription(movieId: string) {
+    const movie = this.movies.find(mve => mve._id === movieId)
+    if(!movie){
+      return
+    }
+    
+    console.log(movie.Description)
   }
 
   addMovieToFavorites(movieId: string){
