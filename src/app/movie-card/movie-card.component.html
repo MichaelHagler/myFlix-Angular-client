@@ -17,14 +17,14 @@
       <button
         mat-button
         color="primary"
-        (click)="getDirector(movie._id)"
+        (click)="getDirector(movie.Director.Name, movie.Director.Bio)"
       >
         Director
       </button>
       <button
         mat-button
         color="primary"
-        (click)="getDescription(movie._id)"
+        (click)="getDescription(movie.Description)"
       >
         Description
       </button>

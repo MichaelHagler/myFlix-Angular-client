@@ -38,21 +38,21 @@ export class MovieCardComponent {
     });
   }
 
-  getDirector(movieId: string) {
-    const movie = this.movies.find(mve => mve._id === movieId)
-    if(!movie){
-      return
-    }
-    
-    console.log(movie.Director.Name)
+  getDirector(name: string, description: string): void {
+    this.dialog.open(MovieInfoComponent, {
+      data: {
+        title: name,
+        content: description
+      },
+    });
   }
-  getDescription(movieId: string) {
-    const movie = this.movies.find(mve => mve._id === movieId)
-    if(!movie){
-      return
-    }
-    
-    console.log(movie.Description)
+
+  getDescription(description: string): void {
+    this.dialog.open(MovieInfoComponent, {
+      data: {
+        content: description
+      },
+    });
   }
 
   addMovieToFavorites(movieId: string){
