@@ -62,4 +62,12 @@ export class MovieCardComponent {
         console.log(e)
       }})
   }
+
+  removeFavoriteMovie(movieId: string){
+    this.fetchApiData.removeFavoriteMovie(movieId).subscribe({next:() => {
+        console.log("movie removed")
+      }, error:(e) => {
+        console.log(e)
+      }})
+  }
 }

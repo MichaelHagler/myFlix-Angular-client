@@ -11,6 +11,7 @@ export interface IMovies {
     Bio: string
   },
   imageURL: string,
+  FavoriteMovies: string,
   Featured: boolean
 }
 export interface IUserLogin {

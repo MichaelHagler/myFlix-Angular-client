@@ -11,7 +11,7 @@ import {IMovies, IUser} from "../models";
 })
 export class UserProfileComponent {
   //input form for users to update profile
-  @Input() updatedUser: IUser = {
+  updatedUser: IUser = {
     username: "",
     password: "",
     email: "",
@@ -38,6 +38,10 @@ export class UserProfileComponent {
   ngOnInit(): void {
     this.getUser();
   }
+
+  /*getFavoriteMovies(): void{
+    const favoriteMovies = movies.filter(m => user.FavoriteMovies.includes(m.id));
+  }*/
 
   getUser(): void {
     this.fetchApiData.getUser().subscribe((resp) => {

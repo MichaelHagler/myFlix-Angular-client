@@ -65,23 +65,13 @@ export class FetchApiDataService {
   }*/
   getUser(): Observable<any> { //This route doesnt exist on your backend
     const token = localStorage.getItem("token");
-    return this.http.get(apiUrl + "/users", {headers: new HttpHeaders({
+    const username = localStorage.getItem("user");
+    return this.http.get(apiUrl + "/users/" + username, {headers: new HttpHeaders({
         Authorization: `Bearer ${token}`,
       })}).pipe(
       map(this.extractResponseData), catchError(this.handleError));
   }
-
-  // getFavoriteMovies(): Observable<any> {
-  //   const token = localStorage.getItem("token");
-  //   return this.http.get(apiUrl + "users/username", {headers: new HttpHeaders({
-  //     Authorization: "Bearer " + token,
-  //   })}).pipe(
-  //     map(this.extractResponseData),
-  //     map((data) => data.FavoriteMovies),
-  //     catchError(this.handleError));
-  // }
-  //
-
+  
   addFavoriteMovie(movieId: string): Observable<any> {
     const token = localStorage.getItem("token");
     const localStorageUser = localStorage.getItem("user");
@@ -95,14 +85,16 @@ export class FetchApiDataService {
 
   editUser(updatedUser: any): Observable<any> {
     const token = localStorage.getItem("token");
-    return this.http.put(apiUrl + "users/username", updatedUser, {headers: new HttpHeaders({
+    const username = localStorage.getItem("user");
+    return this.http.put(apiUrl + "/users/" + username, updatedUser, {headers: new HttpHeaders({
         Authorization: "Bearer " + token,
       })}).pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   deleteUser(): Observable<any> {
     const token = localStorage.getItem("token");
-    return this.http.delete(apiUrl + "users/username", {headers: new HttpHeaders({
+    const username = localStorage.getItem("user");
+    return this.http.delete(apiUrl + "users/" + username, {headers: new HttpHeaders({
         Authorization: "Bearer " + token,
       })}).pipe(map(this.extractResponseData), catchError(this.handleError));
   }
