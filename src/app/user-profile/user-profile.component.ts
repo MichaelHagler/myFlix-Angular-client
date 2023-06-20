@@ -39,9 +39,9 @@ export class UserProfileComponent {
     this.getUser();
   }
 
-  /*getFavoriteMovies(): void{
-    const favoriteMovies = movies.filter(m => user.FavoriteMovies.includes(m.id));
-  }*/
+  getFavoriteMovies(): void{
+    const favoriteMovies = this.movies.filter(m => this.user.FavoriteMovies.includes(m._id));
+  }
 
   getUser(): void {
     this.fetchApiData.getUser().subscribe((resp) => {

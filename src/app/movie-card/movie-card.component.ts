@@ -12,6 +12,7 @@ import {IMovies} from "../models";
 })
 export class MovieCardComponent {
   movies: IMovies[] = [];
+  favorites: any[] = [];
   constructor(
     public fetchApiData: FetchApiDataService,
     public snackBar: MatSnackBar,
@@ -20,6 +21,7 @@ export class MovieCardComponent {
 
   ngOnInit(): void {
     this.getMovies();
+    this.getFavorites();
   }
 
   getMovies(): void {
@@ -55,19 +57,34 @@ export class MovieCardComponent {
     });
   }
 
+  getFavorites(): void {
+    this.fetchApiData.getUser().subscribe((resp: any) => {
+      this.favorites = resp.FavoriteMovies;
+      return this.favorites;
+    });
+  }
+
+  isFavorite(id: string): boolean {
+    return this.favorites.includes(id);
+  }
+
   addMovieToFavorites(movieId: string){
-    this.fetchApiData.addFavoriteMovie(movieId).subscribe({next:() => {
-        console.log("movie added")
-      }, error:(e) => {
-        console.log(e)
-      }})
+    console.log(movieId);
+    this.fetchApiData.addFavoriteMovie(movieId).subscribe((result) => {
+      this.snackBar.open('Movie added to favorites', 'OK', {
+        duration: 2000,
+      });
+      this.ngOnInit();
+    });
   }
 
   removeFavoriteMovie(movieId: string){
-    this.fetchApiData.removeFavoriteMovie(movieId).subscribe({next:() => {
-        console.log("movie removed")
-      }, error:(e) => {
-        console.log(e)
-      }})
+    console.log(movieId);
+    this.fetchApiData.removeFavoriteMovie(movieId).subscribe((result) => {
+      this.snackBar.open('Movie removed from favorites', 'OK', {
+        duration: 2000,
+      });
+      this.ngOnInit();
+    });
   }
 }
