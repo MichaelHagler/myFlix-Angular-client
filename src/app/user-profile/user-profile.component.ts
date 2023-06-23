@@ -39,9 +39,39 @@ export class UserProfileComponent {
     this.getUser();
   }
 
-  getFavoriteMovies(): void{
-    const favoriteMovies = this.movies.filter(m => this.user.FavoriteMovies.includes(m._id));
+  getFavorites(): void {
+    this.fetchApiData.getUser().subscribe((resp: any) => {
+      this.favorites = resp.FavoriteMovies;
+      return this.favorites;
+    });
   }
+  isFavorite(id: string): boolean {
+    return this.favorites.includes(id);
+  }
+
+  addMovieToFavorites(movieId: string){
+    console.log(movieId);
+    this.fetchApiData.addFavoriteMovie(movieId).subscribe((result) => {
+      this.snackBar.open('Movie added to favorites', 'OK', {
+        duration: 2000,
+      });
+      this.ngOnInit();
+    });
+  }
+
+  removeFavoriteMovie(movieId: string){
+    console.log(movieId);
+    this.fetchApiData.removeFavoriteMovie(movieId).subscribe((result) => {
+      this.snackBar.open('Movie removed from favorites', 'OK', {
+        duration: 2000,
+      });
+      this.ngOnInit();
+    });
+  }
+  /*getFavoriteMovies(): void{
+    const favoriteMovies = this.movies.filter(m => this.user.FavoriteMovies.includes(m._id));
+    return this.favorites;
+  }*/
 
   getUser(): void {
     this.fetchApiData.getUser().subscribe((resp) => {
