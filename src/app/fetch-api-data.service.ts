@@ -21,7 +21,11 @@ export class FetchApiDataService {
     );
   }
 
-  // Making the api call for the login endpoint
+  /**
+  * Makes the api call for the user login endpoint.
+  * @param userDetails The user credentials
+  * @returns http POST request
+  */
   userLogin(userDetails: IUserLogin): Observable<IUserLoginResponse> {
     return this.http.post<IUserLoginResponse>(`${apiUrl}/login`, userDetails).pipe(
       catchError(this.handleError)
