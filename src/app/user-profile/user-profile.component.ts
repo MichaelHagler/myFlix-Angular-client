@@ -27,7 +27,7 @@ export class UserProfileComponent {
     FavoriteMovies:[]
   };
   movies: IMovies[] = [];
-  favorites: any[] = [];
+  favorites: IMovies[] = [];
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -37,17 +37,18 @@ export class UserProfileComponent {
 
   ngOnInit(): void {
     this.getUser();
+    this.getFavorites()
   }
 
   getFavorites(): void {
-    this.fetchApiData.getUser().subscribe((resp: any) => {
-      this.favorites = resp.FavoriteMovies;
+      this.fetchApiData.getAllMovies().subscribe((resp: any) => {
+      this.favorites = resp.filter((movie: IMovies) => this.user.FavoriteMovies.includes(movie._id));
       return this.favorites;
     });
   }
-  isFavorite(id: string): boolean {
-    return this.favorites.includes(id);
-  }
+  // isFavorite(id: string): boolean {
+  //   return this.favorites.includes(id);
+  // }
 
   addMovieToFavorites(movieId: string){
     console.log(movieId);
@@ -68,10 +69,6 @@ export class UserProfileComponent {
       this.ngOnInit();
     });
   }
-  /*getFavoriteMovies(): void{
-    const favoriteMovies = this.movies.filter(m => this.user.FavoriteMovies.includes(m._id));
-    return this.favorites;
-  }*/
 
   getUser(): void {
     this.fetchApiData.getUser().subscribe((resp) => {
