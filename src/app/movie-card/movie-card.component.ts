@@ -24,6 +24,9 @@ export class MovieCardComponent {
     this.getFavorites();
   }
 
+  /**
+   * Gets all movies
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
