@@ -20,6 +20,9 @@ export class UserLoginFormComponent {
     public router: Router
   ) { }
 
+  /**
+   * logins in user
+   */
   loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe({
       next:(result) => {

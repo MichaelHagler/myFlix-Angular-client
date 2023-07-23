@@ -34,6 +34,11 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * gets genre
+   * @param name genre name
+   * @param description genre description
+   */
   getGenre(name: string, description: string): void {
     this.dialog.open(MovieInfoComponent, {
       data: {
@@ -43,6 +48,11 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * get director
+   * @param name director's name
+   * @param description director's bio
+   */
   getDirector(name: string, description: string): void {
     this.dialog.open(MovieInfoComponent, {
       data: {
@@ -52,6 +62,10 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * Movie description
+   * @param description 
+   */
   getDescription(description: string): void {
     this.dialog.open(MovieInfoComponent, {
       data: {
@@ -60,6 +74,9 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * gets user's favorite movies
+   */
   getFavorites(): void {
     this.fetchApiData.getUser().subscribe((resp: any) => {
       this.favorites = resp.FavoriteMovies;
@@ -67,10 +84,19 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * checks if movie is a favorite or not
+   * @param id 
+   * @returns 
+   */
   isFavorite(id: string): boolean {
     return this.favorites.includes(id);
   }
 
+  /**
+   * uses movie ID and adds it to user's favorites
+   * @param movieId 
+   */
   addMovieToFavorites(movieId: string){
     console.log(movieId);
     this.fetchApiData.addFavoriteMovie(movieId).subscribe((result) => {
@@ -81,6 +107,10 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * removes movie from favorites
+   * @param movieId 
+   */
   removeFavoriteMovie(movieId: string){
     console.log(movieId);
     this.fetchApiData.removeFavoriteMovie(movieId).subscribe((result) => {
