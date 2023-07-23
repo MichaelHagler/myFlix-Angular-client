@@ -40,6 +40,9 @@ export class UserProfileComponent {
     this.getFavorites()
   }
 
+  /**
+   * gets favorite movies
+   */
   getFavorites(): void {
       this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.favorites = resp.filter((movie: IMovies) => this.user.FavoriteMovies.includes(movie._id));
@@ -50,6 +53,10 @@ export class UserProfileComponent {
   //   return this.favorites.includes(id);
   // }
 
+  /**
+   * adds movie to favorites
+   * @param movieId 
+   */
   addMovieToFavorites(movieId: string){
     console.log(movieId);
     this.fetchApiData.addFavoriteMovie(movieId).subscribe((result) => {
@@ -60,6 +67,10 @@ export class UserProfileComponent {
     });
   }
 
+  /**
+   * removes movie from favorites
+   * @param movieId 
+   */
   removeFavoriteMovie(movieId: string){
     console.log(movieId);
     this.fetchApiData.removeFavoriteMovie(movieId).subscribe((result) => {
@@ -70,6 +81,9 @@ export class UserProfileComponent {
     });
   }
 
+  /**
+   * get user's current information
+   */
   getUser(): void {
     this.fetchApiData.getUser().subscribe((resp) => {
       console.log(resp)
@@ -81,6 +95,9 @@ export class UserProfileComponent {
     });
   }
 
+  /**
+   * updates user information 
+   */
   updateUserData(): void {
     this.fetchApiData.editUser(this.updatedUser).subscribe((result) => {
       this.snackBar.open("User profile updated", "OK", {
